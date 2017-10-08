@@ -1,4 +1,6 @@
-## 2017 面试题 - JAVA
+## 2017 Android - Java 面试题集合，欢迎补充
+
+## Java - [Android](./README.md)
 
 ### **ArrayList和LinkedList的区别**
 
