@@ -2,7 +2,9 @@
 
 ## Android - [Java](./Java.md)
 
-### **[基础知识](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/Android/Android%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.md)**
+### **基础知识**
+
+* [Android基础知识](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/Android/Android%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.md)    
 
 ### **判断处于主线程还是子线程**
 
@@ -161,7 +163,8 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 * Handler和Looper对象是属于线程内部的数据，不过也提供与外部线程的访问接口，**Handler就是公开给外部线程的接口，用于线程间的通信**。Looper是由系统支持的用于创建和管理MessageQueue的依附于一个线程的循环处理对象，而Handler是用于操作线程内部的消息队列的，所以Handler也必须依附一个线程，而且只能是一个线程
 
-* http://www.cnblogs.com/smyhvae/p/4003922.html
+* **链接**
+    - http://www.jianshu.com/p/02962454adf7
 
 ### **解释下Application类**
 
@@ -233,5 +236,57 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     - 另一种情况是在某些情况下 View 需要多次 measure 才能确定自己的测量宽高，在前几次的测量宽高过程中得出的值可能和最终宽高的不一致，但最终来说：测量宽高和最终宽高相等
 
 
-### **其他链接**
+### **事件分发流程**
+* **Android事件分发流程**
+    ```
+    Activity(Windwos) -> ViewGroup -> View
+    ```
+    ![流程图说明](http://upload-images.jianshu.io/upload_images/2001124-1e27c73c26652a84.png?imageMogr2/auto-orient/strip)
+
+    * 对于```dispatchTouchEvent``` , ```onTouchEvent``` 返回 true 就是自己消费了，返回 false 就传到父View 的```onTouchEvent```方法
+    * ViewGroup 想把事件分发给自己的 ```onTouchEvent```,需要在```onInterceptTouchEvent```方法中返回 true 把事件拦截下来
+    * ViewGroup 的 ```onInterceptTouchEvent``` 默认不拦截，所以 ```super.onInterceptTouchEvent() = false```
+    * View(这里指没有子View)没有拦截器,所以 View 的```dispatchTouchEvent```的```super.dispatchTouchEvent(event)```默认把事件分发给自己的```onTouchEvent```
+
+
+* **链接**
+    - [Android事件分发机制详解：史上最全面、最易懂](http://blog.csdn.net/carson_ho/article/details/54136311)
+    - [图解 Android 事件分发机制](http://www.jianshu.com/p/e99b5e8bd67b)
+
+### **View的渲染机制**
+* **链接**
+    * [Android性能优化第（四）篇---Android渲染机制](http://www.jianshu.com/p/9ac245657127)
+
+### **编译打包的过程**
+
+### **ANR的原理(源码角度)**
+
+### **属性动画的原理**
+
+### **Android有多个资源文件夹，应用在不同分辨率下是如何查找对应文件夹下的资源的，描述整个过程**
+
+### **应用最多占可被分配多少内存**
+
+-> 进程数*16M
+
+### **otto源码解析**
+
+* [otto](https://github.com/square/otto) 这个开源项目是一个event bus模式的消息框架，用于程序各个模块之间的通信，此消息框架可以使得各个
+模块之间减少耦合性。
+* **链接**
+    * [otto源码分析](http://blog.csdn.net/com360/article/details/38640771)
+
+
+
+
+
+## **其他链接**
+---
 * [Android 开发工程师面试指南](https://www.diycode.cc/wiki/androidinterview)
+
+
+
+## **注明**
+---
+
+* **所有内容我不属有著作权，若有侵权请联系我删除**
