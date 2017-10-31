@@ -33,11 +33,12 @@
     ```
 * **回到ActivtyA** <br>
     ```
-    onPause(B) -> onRestart(A) -> onStart(A) -> onResume(A) -> onStop(B)
+    onPause(B) -> onRestart(A) -> onStart(A) -> onResume(A) -> onStop(B) -> onDestory(B)
     ```
 
 ### **HandlerThread的原理**
 
+* **释义** HandlerThread 是可以创建带有 looper 新线程的类
 * 
 
 
@@ -193,11 +194,6 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     * [罗升阳 - Android应用程序启动过程源代码分析](http://blog.csdn.net/luoshengyang/article/details/6689748)
     * http://solart.cc/2016/08/20/launch_app/
 
-### **Glide4.0源码解析**
-* **链接**
-    * [Android 图片加载框架Glide4.0源码完全解析 一](http://www.cnblogs.com/guanmanman/p/7008259.html)
-    * [Android 图片加载框架Glide4.0源码完全解析 二](http://www.cnblogs.com/guanmanman/p/7040942.html)
-
 
 ### **View的测量宽/高和最终宽/高有什么区别（另一种问法: view 的 getMeasuredWidth 和 getWidth 有什么区别）**
 
@@ -310,9 +306,13 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 ![图](http://upload-images.jianshu.io/upload_images/2893137-1047c70c15c1589b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
+## **关于第三库问题**
 ---
 
-## **关于第三库问题**
+### **Glide4.0源码解析**
+* **链接**
+    * [Android 图片加载框架Glide4.0源码完全解析 一](http://www.cnblogs.com/guanmanman/p/7008259.html)
+    * [Android 图片加载框架Glide4.0源码完全解析 二](http://www.cnblogs.com/guanmanman/p/7040942.html)
 
 ### **otto源码解析**
 
