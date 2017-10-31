@@ -8,6 +8,39 @@
 
 * [Android基础知识](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/Android/Android%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.md)    
 
+
+### **Service生命周期**
+* service的生命周期分为两种<br>
+
+    ![生命周期](http://mmbiz.qpic.cn/mmbiz_png/CP9AlgoibiagV38ticvRln0KQkPmtfiaMEUf7IOqsByHdSY85RVD5vgibRldmZ9YzvfTDyjHT4sKib3anjCWnKdD8UZg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
+
+### **Android中的几种动画**
+* **补间动画** :是对某个View进行一系列的动画的操作，包括淡入淡出（Alpha），缩放（Scale），平移（Translate），旋转（Rotate）四种模式。
+
+* **帧动画** : 将多张图片组合起来进行播放，类似于早期电影的工作原理，很多App的loading是采用这种方式
+
+* **属性动画** : 属性动画不再仅仅是一种视觉效果了，而是一种不断地对值进行操作的机制，并将值赋到指定对象的指定属性上，可以是任意对象的任意属性
+
+### **从ActivityA跳转到ActivityB的生命周期调用顺序**
+* **打开ActivityA**<br>
+    ```
+    onCreate(A) -> onStart(A) -> onResume(A)
+    ```
+
+* **打开ActivityB**<br>
+    ```
+    onPause(A) -> onCreate(B) -> onStart(B) -> onResume(B) -> onStop(A)
+    ```
+* **回到ActivtyA** <br>
+    ```
+    onPause(B) -> onRestart(A) -> onStart(A) -> onResume(A) -> onStop(B)
+    ```
+
+### **HandlerThread的原理**
+
+* 
+
+
 ### **判断处于主线程还是子线程**
 
 ```
@@ -55,64 +88,6 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 * 两个参数的意义: 父控件对View的宽高约束
 * http://blog.csdn.net/xmxkf/article/details/51490283
-
-
-### **Gilde怎么实现圆角图**
-* **实现原理**  利用 ```Transform```
-* **代码示例**
-    ```
-    public class GlideRoundTransform extends BitmapTransformation {
-
-    private static float radius = 0f;
-
-    /**
-     * 构造函数 默认圆角半径 4dp
-     *
-     * @param context Context
-     */
-    public GlideRoundTransform(Context context) {
-        this(context, 4);
-    }
-
-    /**
-     * 构造函数
-     *
-     * @param context Context
-     * @param dp      圆角半径
-     */
-    public GlideRoundTransform(Context context, int dp) {
-        super(context);
-        radius = Resources.getSystem().getDisplayMetrics().density * dp;
-    }
-
-    @Override
-    protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
-        return roundCrop(pool, toTransform);
-    }
-
-    private static Bitmap roundCrop(BitmapPool pool, Bitmap source) {
-        if (source == null) return null;
-
-        Bitmap result = pool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
-        if (result == null) {
-            result = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
-        }
-
-        Canvas canvas = new Canvas(result);
-        Paint paint = new Paint();
-        paint.setShader(new BitmapShader(source, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));
-        paint.setAntiAlias(true);
-        RectF rectF = new RectF(0f, 0f, source.getWidth(), source.getHeight());
-        canvas.drawRoundRect(rectF, radius, radius, paint);
-        return result;
-    }
-
-    @Override
-    public String getId() {
-        return getClass().getName() + Math.round(radius);
-    }
-  }
-    ```
 
 ### **View绘制流程**
 
@@ -277,15 +252,6 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 -> 进程数*16M
 
-### **otto源码解析**
-
-* [otto](https://github.com/square/otto) 这个开源项目是一个event bus模式的消息框架，用于程序各个模块之间的通信，此消息框架可以使得各个
-模块之间减少耦合性。
-
-* **链接**
-    * [otto源码分析](http://blog.csdn.net/com360/article/details/38640771)
-
-
 ### **一个应用中有多少个 Window**
 * 有视图的地方就有 Window，比如 Activity、Dialog、Toast、PopUpWindows、菜单 等视图都对应着一个window.
 
@@ -343,9 +309,84 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 ![图](http://upload-images.jianshu.io/upload_images/2893137-1047c70c15c1589b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+
+---
+
+## **关于第三库问题**
+
+### **otto源码解析**
+
+* [otto](https://github.com/square/otto) 这个开源项目是一个event bus模式的消息框架，用于程序各个模块之间的通信，此消息框架可以使得各个
+模块之间减少耦合性。
+
+* **链接**
+    * [otto源码分析](http://blog.csdn.net/com360/article/details/38640771)
+
+### **Gilde怎么实现圆角图**
+* **实现原理**  利用 ```Transform```
+* **代码示例**
+    ```
+    public class GlideRoundTransform extends BitmapTransformation {
+
+    private static float radius = 0f;
+
+    /**
+     * 构造函数 默认圆角半径 4dp
+     *
+     * @param context Context
+     */
+    public GlideRoundTransform(Context context) {
+        this(context, 4);
+    }
+
+    /**
+     * 构造函数
+     *
+     * @param context Context
+     * @param dp      圆角半径
+     */
+    public GlideRoundTransform(Context context, int dp) {
+        super(context);
+        radius = Resources.getSystem().getDisplayMetrics().density * dp;
+    }
+
+    @Override
+    protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
+        return roundCrop(pool, toTransform);
+    }
+
+    private static Bitmap roundCrop(BitmapPool pool, Bitmap source) {
+        if (source == null) return null;
+
+        Bitmap result = pool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
+        if (result == null) {
+            result = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(result);
+        Paint paint = new Paint();
+        paint.setShader(new BitmapShader(source, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));
+        paint.setAntiAlias(true);
+        RectF rectF = new RectF(0f, 0f, source.getWidth(), source.getHeight());
+        canvas.drawRoundRect(rectF, radius, radius, paint);
+        return result;
+    }
+
+    @Override
+    public String getId() {
+        return getClass().getName() + Math.round(radius);
+    }
+  }
+    ```
+
+
 ## **其他链接**
 ---
 * [Android 开发工程师面试指南](https://www.diycode.cc/wiki/androidinterview)
+
 * [Android 开发面试 “108” 问](https://www.diycode.cc/topics/993?utm_source=gank.io&utm_medium=email)
+
+* [这些Android面试题你一定需要](https://mp.weixin.qq.com/s?__biz=MzI0MjE3OTYwMg==&mid=2649548612&idx=1&sn=8e46b6dd47bd8577a5f7098aa0889098&chksm=f1180c39c66f852fd955a29a9cb4ffa9dc4d528cab524059bcabaf37954fa3f04bc52c41dae8&scene=21#wechat_redirect)
+
 
  
