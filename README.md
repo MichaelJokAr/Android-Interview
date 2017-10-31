@@ -25,7 +25,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 * [单例模式](https://github.com/francistao/LearningNotes/blob/master/Part1/DesignPattern/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.md)
 * [Builder模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/Builder%E6%A8%A1%E5%BC%8F.md)
 * [原型模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.md)
-* [简单工厂](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.md)
+* [简单工厂](https://github.com/francistao/LearningNotes/blob/master/Part1/DesignPattern/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82.md)
 * 工厂方法模式
 * 抽象工厂模式
 * [策略模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.md)
@@ -130,15 +130,16 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 ### **Activity的创建过程**
 
- ActivityManagerService -> 
- ActivityStackSupervisor -> 
- ActivityStack -> 
- ActivityStackSupervisor -> 
+ ActivityManagerService -> </br>
+ ActivityStackSupervisor -> </br>
+ ActivityStack -> </br>
+ ActivityStackSupervisor -> </br>
  ApplicationThread 
 
 * **链接**
     * http://blog.csdn.net/feiduclear_up/article/details/49201357
     * http://blog.csdn.net/xmxkf/article/details/52452218
+    * [Android源码分析-Activity的启动过程](http://blog.csdn.net/singwhatiwanna/article/details/18154335)
 
 ### **Handler**
 
@@ -150,7 +151,8 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     * **线程间的通信**  在执行较为耗时的操作时，Handler负责将子线程中执行的操作的结果传递到UI线程，然后UI线程再根据传递过来的结果进行相关UI元素的更新
 
 * **Handler用法**
-![示意图](http://img.blog.csdn.net/20140825153914738)
+    
+    ![示意图](http://img.blog.csdn.net/20140825153914738)
 
 * 根据上面的图片，我们现在来解析一下异步消息处理机制
     * **Message**：消息体，用于装载需要发送的对象
@@ -258,12 +260,16 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     * [Android性能优化第（四）篇---Android渲染机制](http://www.jianshu.com/p/9ac245657127)
 
 ### **编译打包的过程**
+* 等待补充
 
 ### **ANR的原理(源码角度)**
+* 等待补充
 
 ### **属性动画的原理**
+* 等待补充
 
 ### **Android有多个资源文件夹，应用在不同分辨率下是如何查找对应文件夹下的资源的，描述整个过程**
+* 等待补充
 
 ### **应用最多占可被分配多少内存**
 
@@ -273,20 +279,76 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 * [otto](https://github.com/square/otto) 这个开源项目是一个event bus模式的消息框架，用于程序各个模块之间的通信，此消息框架可以使得各个
 模块之间减少耦合性。
+
 * **链接**
     * [otto源码分析](http://blog.csdn.net/com360/article/details/38640771)
 
 
+### **一个应用中有多少个 Window**
+* 有视图的地方就有 Window，比如 Activity、Dialog、Toast、PopUpWindows、菜单 等视图都对应着一个window.
+
+* **连接**
+    * [ Android 带你彻底理解 Window 和 WindowManager](http://blog.csdn.net/yhaolpz/article/details/68936932)
 
 
+### **为什么Dialog不能用Application的Context**
+* Dialog初化始时是通过Context.getSystemServer 来获取 WindowManager，而如果用Application或者Service的Context去获取这个WindowManager服务的话，会得到一个WindowManagerImpl的实例，这个实例里token也是空的。之后在Dialog的show方法中将Dialog的View(PhoneWindow.getDecorView())添加到WindowManager时会给token设置默认值还是null。
+如果这个Context是Activity，则直接返回Activity的mWindowManager，这个mWindowManager在Activity的attach方法被创建，Token指向此Activity的Token，mParentWindow为Activity的Window本身
+
+* **答案**<br>
+ 那为什么一定要是Activity的Token呢？我想使用Token应该是为了安全问题，通过Token来验证WindowManager服务请求方是否是合法的。如果我们可以使用Application的Context，或者说Token可以不是Activity的Token，那么用户可能已经跳转到别的应用的Activity界面了，但我们却可以在别人的界面上弹出我们的Dialog，想想就觉得很危险。
+
+
+* **连接** <br>
+     http://www.jianshu.com/p/628ac6b68c15
+
+### **Android Activity 、 Window 、 View之间的关系**
+
+* 如图
+
+    ![](http://img.blog.csdn.net/20151030181018072?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+### **关于Android Force Close 出现的原因 以及解决方法**
+* **原因** 
+    * Error
+    * OOM , 内存溢出
+    * StackOverFlowError
+    * RuntimeException(比如空指针异常)
+
+* **如何避免** <br>
+    * 可以实现Thread.UncaughtExceptionHandler接口的uncaughtException方法 
+
+###  **哪些情况会出现内存泄漏，如何解决**
+* 对于使用了Boardcast Receive、ContentObserver、File、Cursor、Stream、Bitmap等资源的时候没有销毁。<br>
+  解决方法 -> 应该在不使用的时候关闭或者注销
+
+* 静态内部类持有外部成员变量<br>
+  解决方法 -> 可以使用若引用
+    
+* 使用了 context 持有 Activity 导致 Activity无法释放 <br>
+  解决方法 -> 使用 ApplicationContext 
+    
+* 集合中没有使用的对象没有及时 remove
+
+* handler 引起的内存泄漏 <br>
+  解决方法 -> 使用若引用持有 Activity等的 Context
+    
+* 设置过的Listener没有及时移除 <br>
+  解决方法 -> 在destory 里 设置 Listener 为 null
+
+
+### **Android系统的架构**
+
+![图](http://upload-images.jianshu.io/upload_images/2893137-1047c70c15c1589b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## **其他链接**
 ---
 * [Android 开发工程师面试指南](https://www.diycode.cc/wiki/androidinterview)
+* [Android 开发面试 “108” 问](https://www.diycode.cc/topics/993?utm_source=gank.io&utm_medium=email)
 
 
 
 ## **注明**
 ---
 
-* **所有内容我不属有著作权，若有侵权请联系我删除**
+* **部分内容来自网络，若有侵权请联系我删除**
