@@ -1,4 +1,5 @@
 ## 2017 Android - Java 面试题集合，欢迎补充
+* **说明**：部分内容来自网络，若有侵权请联系我删除
 
 ## Java - [Android](./README.md)
 

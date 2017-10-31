@@ -1,5 +1,7 @@
 ## 2017 Android 面试题集合，欢迎补充
 
+* **说明**：部分内容来自网络，若有侵权请联系我删除
+
 ## Android - [Java](./Java.md)
 
 ### **基础知识**
@@ -346,9 +348,4 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 * [Android 开发工程师面试指南](https://www.diycode.cc/wiki/androidinterview)
 * [Android 开发面试 “108” 问](https://www.diycode.cc/topics/993?utm_source=gank.io&utm_medium=email)
 
-
-
-## **注明**
----
-
-* **部分内容来自网络，若有侵权请联系我删除**
+ 
