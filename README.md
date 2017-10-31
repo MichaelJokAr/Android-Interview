@@ -12,7 +12,7 @@
 ### **Service生命周期**
 * service的生命周期分为两种<br>
 
-    ![生命周期](http://mmbiz.qpic.cn/mmbiz_png/CP9AlgoibiagV38ticvRln0KQkPmtfiaMEUf7IOqsByHdSY85RVD5vgibRldmZ9YzvfTDyjHT4sKib3anjCWnKdD8UZg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
+    ![生命周期](http://my.csdn.net/uploads/201204/17/1334628702_9553.png)
 
 ### **Android中的几种动画**
 * **补间动画** :是对某个View进行一系列的动画的操作，包括淡入淡出（Alpha），缩放（Scale），平移（Translate），旋转（Rotate）四种模式。
@@ -56,33 +56,17 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 ```
 
 ### **设计模式**
-
-* [面向对象六大原则](https://github.com/francistao/LearningNotes/blob/master/Part1/DesignPattern/%E5%B8%B8%E8%A7%81%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.md)
-* [单例模式](https://github.com/francistao/LearningNotes/blob/master/Part1/DesignPattern/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.md)
-* [Builder模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/Builder%E6%A8%A1%E5%BC%8F.md)
-* [原型模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.md)
-* [简单工厂](https://github.com/francistao/LearningNotes/blob/master/Part1/DesignPattern/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82.md)
-* 工厂方法模式
-* 抽象工厂模式
-* [策略模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.md)
-* 状态模式
-* [责任链模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F.md)
-* 解释器模式
-* 命令模式
-* [观察者模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.md)
-* 备忘录模式
-* 迭代器模式
-* 模板方法模式
-* 访问者模式
-* 中介者模式
-* [代理模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.md)
-* 组合模式
-* [适配器模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.md)
-* 装饰模式
-* 享元模式
-* [外观模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F.md)
-* 桥接模式
-
+|               |               |        |
+| :-------------: |:-------------:| :-----:|
+| [面向对象六大原则](https://github.com/francistao/LearningNotes/blob/master/Part1/DesignPattern/%E5%B8%B8%E8%A7%81%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.md) | [单例模式](https://github.com/francistao/LearningNotes/blob/master/Part1/DesignPattern/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.md) | [Builder模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/Builder%E6%A8%A1%E5%BC%8F.md) | 
+| [原型模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.md) | [简单工厂](https://github.com/francistao/LearningNotes/blob/master/Part1/DesignPattern/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82.md) |工厂方法模式 | 
+| 抽象工厂模式 | [策略模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.md) | 状态模式 |
+| [责任链模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F.md) | 解释器模式 | 命令模式|
+| [观察者模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.md) | 备忘录模式 | 迭代器模式 |
+|  模板方法模式 | 访问者模式| 中介者模式|
+| [代理模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.md) | 组合模式 |  [适配器模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.md) |
+| 装饰模式 | 享元模式 |  [外观模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F.md) |
+|               |               |        |
 
 
 ### **onMeasure返回的两个参数都有什么信息**
