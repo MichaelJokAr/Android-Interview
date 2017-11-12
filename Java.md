@@ -52,3 +52,55 @@
 * 不能，class可以继承多个interface，而只能继承一个abstract class
 * https://www.ibm.com/developerworks/cn/java/l-javainterface-abstract/index.html
 
+
+### **String、StringBuffer、StringBuilder 区别**
+* **String** 是不可变类，任何对 String 的改变都会引发新的 String 对象生成
+
+* **StingBuffer** 是可变类，任何对他所指代的字符串的改变都会产生新的对象，支持并发操作，线程安全的。适合多线程中使用
+
+* **StringBuilder** 是可变类，但不支持并发操作，线性不安全的，不适合在多线程中使用。但在单线程中性能比 StringBuffer 高
+
+### **volatile详解**
+
+* **volatile关键字的两层语义**
+    * 保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的
+    * 禁止进行指令重排序
+
+* **链接**
+    * http://www.cnblogs.com/dolphin0520/p/3920373.html
+
+### **静态内部类和非静态内部类的不同**
+
+* 内部静态类不需要指向外部类引用，但是非静态内部类需要持有外部类引用
+
+* 非静态内部类能够访问外部类的静态和非静态成员。静态内部类不能访问非静态成员，他只能访问外部静态成员
+
+* 一个非静态内部类不能脱离外部类实体被创建，一个非静态内部类可以访问外部类的数据和方法，因为他就在外部类里面。
+
+### **Set和List的区别**
+
+### **equals 和 == 的区别**
+ * **首先说一下 Java 中的数据类型**：
+    * 基本类型，也称原始数据类型：byte、short、chat、int、long、float、double、boolean
+    * 复合数据类型（类）
+
+* **```== ```**
+    * 比较 基本类型时 比较的是他们的值
+    * 比较复合数据类型时 比较的是他们在内存中存放的地址
+
+* **equals**
+    * 基本类型 无法用 equals
+    * 复合类型：在 Java 中所有的类都是继承了 Object 这个基类，在Object中定义了一个 equals 的方法，这方法初始行为是比较对象的内存地址，但一些类库对他进行了重写比如 String、Integer、Date等都有自己的具体事项，这些不在是比较类在内存中的存放地址。<br>
+     所以对复合数据类型之间进行 equals 比较：在没有重写 equals 方法情况下他们之间比较的还是在内存中的存放地址，因为Objcet的equals方法也是用 ```== ``` 进行比较的，所以比较结果跟 ```== ``` 的结果相同
+
+### **Hashmap的原理**
+* **原理** ： HashMap 是基于 hashing 的原理，我们使用 put(key,value) 存储对象到 HashMap 中，使用 get(key) 从 HashMap 中获取对象。当我们给 put() 方法传递键和值时，我们先对 key 调用 hashCode() 方法，放回的 hashCode 用于找到 bucket 位置来存储 Entry 对象
+
+* **当两个对象的hashcode相同会发生什么？** ：因为 hashCode相同，所以他们的 bucket 位置也相同，'碰撞' 会发生。因为 HashMap 使用链表存储对象，这个 Entry(包含有键值对的 Map.Entry对象)会存储在链表中
+
+* **如果两个键的hashcode相同，如何获取值对象** :  当我们调用 get() 方法，HashMap 会使用键对象的 hashCode 找到 bucket 位置，然后调用 keys.equlas() 方法去找到链表中正确节点，最终找到要找的值
+
+### **用什么算法算出hashcode和数组链表对应的**
+* hash算法
+
+### **拆箱装箱**
