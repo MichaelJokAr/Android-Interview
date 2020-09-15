@@ -180,10 +180,40 @@
 * hash算法
 
 ---
+## **synchronized**
+https://www.cnblogs.com/toria/p/11234323.html
+
+## **synchronized  底层实现**
+
+## **synchronized用的锁是存在哪里的？**
+
+　　synchronized用到的锁是存在Java对象头里的。
+
+## **synchronized和 Lock 的区别？**
+
+- Lock是一个接口，而synchronized是Java中的关键字，synchronized是内置的语言实现；
+
+- synchronized在发生异常时，会自动释放线程占有的锁，因此不会导致死锁现象发生；而Lock在发生异常时，如果没有主动通过unLock()去释放锁，则很可能造成死锁现象，因此使用Lock时需要在finally块中释放锁；
+
+- Lock可以让等待锁的线程响应中断，而synchronized却不行，使用synchronized时，等待的线程会一直等待下去，不能够响应中断；
+
+- 通过Lock可以知道有没有成功获取锁（tryLock()方法：如果获取锁成功，则返回true），而synchronized却无法办到。
+
+- Lock可以提高多个线程进行读操作的效率。
+
+　　在性能上来说，如果竞争资源不激烈，两者的性能是差不多的，而当竞争资源非常激烈时（即有大量线程同时竞争），此时Lock的性能要远远优于synchronized。所以说，在具体使用时要根据适当情况选择。
+
+## **Q: 为什么单例模式用了synchroniezed 还要用volatile**
 
 
-## synchronized  底层实现
+考虑这种情况，就知道原因了:若指令被编译器优化，
 
+- （1）那么当A线程执行到instance = new Singleton();的时候，instance已经不为空了，但是对象其实是没有好的
+- （2）当B线程执行到第一个if (instance == null) 时候，会判断instance已经有了，就直接拿去用，那么其实这个对象还没好呢，一定会出错的。
+
+总结一下：如果两个线程都在同不块内 ，那么不加volatile是没问题的，但是当一个线程进入到同不块内，另一个还在外层判空的时候，就出问题了。
+
+拓展：除了编译器做的指令优化之外，其实cpu也有乱序的执行的能力，那么可能这个instance也是没有被创建好就被使用的。
 
 ## volatile关键字的作用、原理
 
@@ -214,8 +244,19 @@
 
 - 有序性实现
 
+
 >参考文档
 - https://www.cnblogs.com/william-dai/p/10895949.html
+
+## **Q: volatile关键字与synchroniezed关键字在内存的区别**
+
+- volatile是变量修饰符，而synchronized则作用于一段代码或方法。
+
+- volatile只是在线程内存和“主”内存间同步某个变量的值；而synchronized通过锁定和解锁某个监视器同步所有变量的值。显然synchronized要比volatile消耗更多资源。
+
+
+[https://blog.csdn.net/qq360514136/article/details/88253255](https://blog.csdn.net/qq360514136/article/details/88253255)
+
 
 ## 下面的代码， str 值最终为多少？换成 Integer 值又为多少，是否会被改变？
 ```
@@ -397,3 +438,16 @@ JDK1.8放弃了锁分段的做法，采用CAS和synchronized方式处理并发�
     HashTable容器使用synchronized来保证线程安全，但在线程竞争激烈的情况下HashTable的效率非常低下。因为多个线程访问HashTable的同步方法时，可能会进入阻塞或轮询状态。如线程1使用put进行添加元素，线程2不但不能使用put方法添加元素，并且也不能使用get方法来获取元素，所以竞争越激烈效率越低。
 
 >[参考](https://www.cnblogs.com/xiaoyangjia/p/11598094.html)
+
+
+
+
+## **Q: 线程原理**
+
+
+## **Q:哪些可以作为gc root**
+在Java语言里，可作为GC Roots对象的包括如下几种： 
+- 虚拟机栈(栈桢中的本地变量表)中的引用的对象 
+- 方法区中的类静态属性引用的对象 
+- 方法区中的常量引用的对象 
+- 本地方法栈中JNI的引用的对象
