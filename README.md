@@ -14,7 +14,7 @@
 
 * service的生命周期分为两种<br>
 
-    ![生命周期](https://upload-images.jianshu.io/upload_images/4625401-756d89b600d55081.png?imageMogr2/auto-orient/strip|imageView2/2/w/404/format/webp)
+    ![生命周期](https://img-blog.csdnimg.cn/20190226163317673.png)
 
 ### **Android中的几种动画**
 
