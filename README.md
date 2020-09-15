@@ -1,23 +1,21 @@
-## 2017 Android 面试题集合，欢迎补充
+> **说明**：部分内容来自网络，若有侵权请联系我删除
 
-* **说明**：部分内容来自网络，若有侵权请联系我删除
-
-## Android - [Java](./Java.md)
+## Android - [Android高级](./advanced.md) - [Java](./Java.md) - [网络](./network.md)
 
 ### **基础知识**
----
+
 
 * [Android基础知识](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/Android/Android%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.md)    
 
 
 ### **Service生命周期**
----
+
 * service的生命周期分为两种<br>
 
-    ![生命周期](http://my.csdn.net/uploads/201204/17/1334628702_9553.png)
+    ![生命周期](https://upload-images.jianshu.io/upload_images/4625401-756d89b600d55081.png?imageMogr2/auto-orient/strip|imageView2/2/w/404/format/webp)
 
 ### **Android中的几种动画**
----
+
 * **补间动画** :是对某个View进行一系列的动画的操作，包括淡入淡出（Alpha），缩放（Scale），平移（Translate），旋转（Rotate）四种模式。
 
 * **帧动画** : 将多张图片组合起来进行播放，类似于早期电影的工作原理，很多App的loading是采用这种方式
@@ -25,7 +23,7 @@
 * **属性动画** : 属性动画不再仅仅是一种视觉效果了，而是一种不断地对值进行操作的机制，并将值赋到指定对象的指定属性上，可以是任意对象的任意属性
 
 ### **从ActivityA跳转到ActivityB的生命周期调用顺序**
----
+
 * **打开ActivityA**<br>
     ```
     onCreate(A) -> onStart(A) -> onResume(A)
@@ -49,18 +47,18 @@
 * **屏幕方向切换时(如果不指定configchange属)**，在屏幕切换之前，系统会销毁 activity，在屏幕切换之后系统又会自动地创建activity，所以 onSaveInstanceState 一定会被执行
 
 ### **HandlerThread的原理**
----
+
 
 * **释义** HandlerThread 是可以创建带有 looper 新线程的类
 * **链接**  http://blog.csdn.net/javazejian/article/details/52426353
 
 ### **Window的工作原理和作用**
----
+
 
 *  等待补充
 
 ### **内存溢出和内存泄漏的区别**
----
+
 
 * **内存溢出** : OUT OF MEMORY 是指程序在申请内存时超出了系统能分配给你的，于是产生溢出
 * **内存泄漏** : MEMORY LEAK 是指系统分配出去的内存无法回收了
@@ -68,7 +66,7 @@
 
 
 ### **判断处于主线程还是子线程**
----
+
 
 ```
 //1
@@ -82,9 +80,9 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 ```
 
 ### **设计模式**
----
+
 |               |               |        |
-| :-------------: |:-------------:| :-----:|
+| :-: |:-:| :--:|
 | [面向对象六大原则](https://github.com/francistao/LearningNotes/blob/master/Part1/DesignPattern/%E5%B8%B8%E8%A7%81%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.md) | [单例模式](https://github.com/francistao/LearningNotes/blob/master/Part1/DesignPattern/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.md) | [Builder模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/Builder%E6%A8%A1%E5%BC%8F.md) | 
 | [原型模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.md) | [简单工厂](https://github.com/francistao/LearningNotes/blob/master/Part1/DesignPattern/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82.md) |工厂方法模式 | 
 | 抽象工厂模式 | [策略模式](https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/DesignPattern/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.md) | 状态模式 |
@@ -97,13 +95,13 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 
 ### **onMeasure返回的两个参数都有什么信息**
----
+
 
 * 两个参数的意义: 父控件对View的宽高约束
 * http://blog.csdn.net/xmxkf/article/details/51490283
 
 ### **View绘制流程**
----
+
 
 * **绘制过程**：View的绘制过程是从ViewRoot 的 performTraversals 方法开始的， 它经过 measure、layout 和 draw 三个过程才能最终将一个 View 绘制出来，其中 measure 用来测量 View 的宽高，layout 用来确定 view 在容器中的位置，draw 则负责将 view 绘制在屏幕上
 
@@ -120,7 +118,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 
 ### **Activity的创建过程**
----
+
 
  ActivityManagerService -> </br>
  ActivityStackSupervisor -> </br>
@@ -134,7 +132,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     * [Android源码分析-Activity的启动过程](http://blog.csdn.net/singwhatiwanna/article/details/18154335)
 
 ### **Handler**
----
+
 
 * **Handler** 是Android类库提供的用于接受、传递和处理消息或Runnable对象的处理类，它结合Message、MessageQueue和Looper类以及当前线程实现了一个消息循环机制，用于实现任务的异步加载和处理
 * **主要用途**
@@ -162,7 +160,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     - http://www.jianshu.com/p/02962454adf7
 
 ### **解释下Application类**
----
+
 
 * **定义**
     * 用于维护全局应用程序状态的基础类
@@ -190,7 +188,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     * http://blog.qiji.tech/archives/14085
 
 ### **APK安装过程**
----
+
 
 *  **APK安装的主要步骤**
     - 将 apk 文件复制到 /data/app/ 目录下
@@ -202,7 +200,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     - http://www.androidchina.net/6667.html
 
 ### **MultiDex工作原理分析和优化方案**
----
+
 
 * **链接**
     * https://zhuanlan.zhihu.com/p/24305296
@@ -214,7 +212,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 
 ### **View的测量宽/高和最终宽/高有什么区别（另一种问法: view 的 getMeasuredWidth 和 getWidth 有什么区别）**
----
+
 
 * 在 View 的默认实现中 View 的测量宽/高和最终宽/高是相等的，只不过 测量宽高（getMeasureWidth/Height）是在 view 的 measure 过程中调用的，而 view 的 最终宽高（getWidth/Height）是在 view 的 layout 过程中调用的;即两者的赋值时机不同，测量宽高比最终宽高获取的时机稍微早点;
 
@@ -231,7 +229,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 
 ### **事件分发流程**
----
+
 
 * **Android事件分发流程**
     ```
@@ -250,38 +248,38 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     - [图解 Android 事件分发机制](http://www.jianshu.com/p/e99b5e8bd67b)
 
 ### **View的渲染机制**
----
+
 
 * **链接**
-    * [Android性能优化第（四）篇---Android渲染机制](http://www.jianshu.com/p/9ac245657127)
+    * [Android性能优化第（四）篇Android渲染机制](http://www.jianshu.com/p/9ac245657127)
 
 ### **编译打包的过程**
----
+
 
 * 等待补充
 
 ### **ANR的原理(源码角度)**
----
+
 
 * 等待补充
 
 ### **属性动画的原理**
----
+
 
 * 等待补充
 
 ### **Android有多个资源文件夹，应用在不同分辨率下是如何查找对应文件夹下的资源的，描述整个过程**
----
+
 
 * 等待补充
 
 ### **应用最多占可被分配多少内存**
----
+
 
 -> 进程数*16M
 
 ### **一个应用中有多少个 Window**
----
+
 
 * 有视图的地方就有 Window，比如 Activity、Dialog、Toast、PopUpWindows、菜单 等视图都对应着一个window.
 
@@ -290,7 +288,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 
 ### **为什么Dialog不能用Application的Context**
----
+
 
 * Dialog初化始时是通过Context.getSystemServer 来获取 WindowManager，而如果用Application或者Service的Context去获取这个WindowManager服务的话，会得到一个WindowManagerImpl的实例，这个实例里token也是空的。之后在Dialog的show方法中将Dialog的View(PhoneWindow.getDecorView())添加到WindowManager时会给token设置默认值还是null。
 如果这个Context是Activity，则直接返回Activity的mWindowManager，这个mWindowManager在Activity的attach方法被创建，Token指向此Activity的Token，mParentWindow为Activity的Window本身
@@ -303,14 +301,14 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
      http://www.jianshu.com/p/628ac6b68c15
 
 ### **Android Activity 、 Window 、 View之间的关系**
----
+
 
 * 如图
 
     ![](http://img.blog.csdn.net/20151030181018072?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
 ### **关于Android Force Close 出现的原因 以及解决方法**
----
+
 
 * **原因** 
     * Error
@@ -323,7 +321,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     * 可以实现Thread.UncaughtExceptionHandler接口的uncaughtException方法 
 
 ###  **哪些情况会出现内存泄漏，如何解决**
----
+
 
 * 对于使用了Boardcast Receive、ContentObserver、File、Cursor、Stream、Bitmap等资源的时候没有销毁。<br>
   解决方法 -> 应该在不使用的时候关闭或者注销
@@ -344,28 +342,28 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 
 ### **Android系统的架构**
----
+
 
 ![图](http://upload-images.jianshu.io/upload_images/2893137-1047c70c15c1589b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 ### **虚拟机和进程的关系**
----
+
 * 每个进程都会创建一个独立的虚拟机
 
 
 ## **关于第三库问题**
----
+
 
 ### **Glide4.0源码解析**
----
+
 
 * **链接**
     * [Android 图片加载框架Glide4.0源码完全解析 一](http://www.cnblogs.com/guanmanman/p/7008259.html)
     * [Android 图片加载框架Glide4.0源码完全解析 二](http://www.cnblogs.com/guanmanman/p/7040942.html)
 
 ### **otto源码解析**
----
+
 
 * [otto](https://github.com/square/otto) 这个开源项目是一个event bus模式的消息框架，用于程序各个模块之间的通信，此消息框架可以使得各个
 模块之间减少耦合性。
@@ -374,7 +372,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     * [otto源码分析](http://blog.csdn.net/com360/article/details/38640771)
 
 ### **Gilde怎么实现圆角图**
----
+
 
 * **实现原理**  利用 ```Transform```
 * **代码示例**
@@ -434,7 +432,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
 
 
 ## **其他链接**
----
+
 * [Android 开发工程师面试指南](https://www.diycode.cc/wiki/androidinterview)
 
 * [Android 开发面试 “108” 问](https://www.diycode.cc/topics/993?utm_source=gank.io&utm_medium=email)

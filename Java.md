@@ -1,9 +1,8 @@
-## 2017 Android - Java 面试题集合，欢迎补充
-* **说明**：部分内容来自网络，若有侵权请联系我删除
+> **说明**：部分内容来自网络，若有侵权请联系我删除
 
-## Java - [Android](./README.md)
+# Java - [Android](./README.md) - [网络](./network.md)
 
-### **ArrayList和LinkedList的区别**
+## **ArrayList和LinkedList的区别**
 
 * ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构
 * 对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针
@@ -19,7 +18,7 @@
 
 - http://pengcqu.iteye.com/blog/502676
 
-### **Java有几种Map**
+## **Java有几种Map**
 
 * HashMap
 * Hashtable
@@ -30,14 +29,14 @@
 * WeakHashMap
 * ConcurrentHashMap
 
-### **HashMap是不是有序的，哪些Map是有序的**
+## **HashMap是不是有序的，哪些Map是有序的**
 
 * HashMap是无序的
 * LinkedHashMap 和 TreeMap 都是有序Map
     - TreeMap 的顺序是按照他自己的算法排序的不能指定
     - LinkedHashMap 的顺序是按照输入的顺序排列
 
-### **list与map -底层如何实现**
+## **list与map -底层如何实现**
 * **Collection(单列集合)**
     * **List(有序,可重复)** <br>
         * **ArrayList**
@@ -102,7 +101,7 @@
 * **链接**
     * http://blog.csdn.net/xy2953396112/article/details/54891527
 
-### **synchronized关键字以及锁的等级：方法锁、对象锁、类锁**
+## **synchronized关键字以及锁的等级：方法锁、对象锁、类锁**
 * 方法锁和对象锁说的其实是一个东西，即只有方法锁或对象锁 和类锁两种锁
 
 * **内置锁**：每个java对象都可以用做一个实现同步的锁，这些锁成为内置锁。线程进入同步代码块或方法的时候会自动获得该锁，在退出同步代码块或方法时会释放该锁。获得内置锁的唯一途径就是进入这个锁的保护的同步代码块或方法。<br>
@@ -114,7 +113,7 @@
     * http://zhh9106.iteye.com/blog/2151791
 
 
-### **Java有哪几种引用**
+## **Java有哪几种引用**
 
 * **强引用**：平时我们编程的时候例如：Object object=new Object（）；那object就是一个强引用了。如果一个对象具有强引用，那就类似于必不可少的生活用品，垃圾回收器绝不会回收它。当内存空 间不足，Java虚拟机宁愿抛出OutOfMemoryError错误，使程序异常终止，也不会靠随意回收具有强引用的对象来解决内存不足问题。
 
@@ -124,20 +123,20 @@
 
 * **虚引用(PhantomReference)**：“虚引用”顾名思义，就是形同虚设，与其他几种引用都不同，虚引用并不会决定对象的生命周期。如果一个对象 仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收。 虚引用主要用来跟踪对象被垃圾回收的活动。虚引用与软引用和弱引用的一个区别在于：虚引用必须和引用队列 （ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引用，就会在回收对象的内存之前，把这个虚引用加入到与之 关联的引用队列中。程序可以通过判断引用队列中是否已经加入了虚引用，来了解被引用的对象是否将要被垃圾回收。程序如果发现某个虚引用已经被加入到引用队 列，那么就可以在所引用的对象的内存被回收之前采取必要的行动
 
-### **接口的所有功能抽象类能实现吗**
+## **接口的所有功能抽象类能实现吗**
 
 * 不能，class可以继承多个interface，而只能继承一个abstract class
 * https://www.ibm.com/developerworks/cn/java/l-javainterface-abstract/index.html
 
 
-### **String、StringBuffer、StringBuilder 区别**
+## **String、StringBuffer、StringBuilder 区别**
 * **String** 是不可变类，任何对 String 的改变都会引发新的 String 对象生成
 
 * **StingBuffer** 是可变类，任何对他所指代的字符串的改变都会产生新的对象，支持并发操作，线程安全的。适合多线程中使用
 
 * **StringBuilder** 是可变类，但不支持并发操作，线性不安全的，不适合在多线程中使用。但在单线程中性能比 StringBuffer 高
 
-### **volatile详解**
+## **volatile详解**
 
 * **volatile关键字的两层语义**
     * 保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的
@@ -146,7 +145,7 @@
 * **链接**
     * http://www.cnblogs.com/dolphin0520/p/3920373.html
 
-### **静态内部类和非静态内部类的不同**
+## **静态内部类和非静态内部类的不同**
 
 * 内部静态类不需要指向外部类引用，但是非静态内部类需要持有外部类引用
 
@@ -154,9 +153,9 @@
 
 * 一个非静态内部类不能脱离外部类实体被创建，一个非静态内部类可以访问外部类的数据和方法，因为他就在外部类里面。
 
-### **Set和List的区别**
+## **Set和List的区别**
 
-### **equals 和 == 的区别**
+## **equals 和 == 的区别**
  * **首先说一下 Java 中的数据类型**：
     * 基本类型，也称原始数据类型：byte、short、chat、int、long、float、double、boolean
     * 复合数据类型（类）
@@ -170,14 +169,231 @@
     * 复合类型：在 Java 中所有的类都是继承了 Object 这个基类，在Object中定义了一个 equals 的方法，这方法初始行为是比较对象的内存地址，但一些类库对他进行了重写比如 String、Integer、Date等都有自己的具体事项，这些不在是比较类在内存中的存放地址。<br>
      所以对复合数据类型之间进行 equals 比较：在没有重写 equals 方法情况下他们之间比较的还是在内存中的存放地址，因为Objcet的equals方法也是用 ```== ``` 进行比较的，所以比较结果跟 ```== ``` 的结果相同
 
-### **Hashmap的原理**
+## **Hashmap的原理**
 * **原理** ： HashMap 是基于 hashing 的原理，我们使用 put(key,value) 存储对象到 HashMap 中，使用 get(key) 从 HashMap 中获取对象。当我们给 put() 方法传递键和值时，我们先对 key 调用 hashCode() 方法，放回的 hashCode 用于找到 bucket 位置来存储 Entry 对象
 
 * **当两个对象的hashcode相同会发生什么？** ：因为 hashCode相同，所以他们的 bucket 位置也相同，'碰撞' 会发生。因为 HashMap 使用链表存储对象，这个 Entry(包含有键值对的 Map.Entry对象)会存储在链表中
 
 * **如果两个键的hashcode相同，如何获取值对象** :  当我们调用 get() 方法，HashMap 会使用键对象的 hashCode 找到 bucket 位置，然后调用 keys.equlas() 方法去找到链表中正确节点，最终找到要找的值
 
-### **用什么算法算出hashcode和数组链表对应的**
+## **用什么算法算出hashcode和数组链表对应的**
 * hash算法
 
-### **拆箱装箱**
+---
+
+
+## synchronized  底层实现
+
+
+## volatile关键字的作用、原理
+
+### 作用
+- 防重排序
+```
+实例化一个对象其实可以分为三个步骤： 
+　　（1）分配内存空间。 
+　　（2）初始化对象。 
+　　（3）将内存空间的地址赋值给对应的引用。 
+但是由于操作系统可以对指令进行重排序，所以上面的过程也可能会变成如下过程： 
+　　（1）分配内存空间。 
+　　（2）将内存空间的地址赋值给对应的引用。 
+　　（3）初始化对象 
+　　如果是这个流程，多线程环境下就可能将一个未初始化的对象引用暴露出来，从而导致不可预料的结果。因此，为了防止这个过程的重排序，我们需要将变量设置为volatile类型的变量。
+```
+- 实现可见性
+- 保证原子性
+
+
+#### volatile的原理
+- 可见性实现
+```
+线程本身并不直接与主内存进行数据的交互，而是通过线程的工作内存来完成相应的操作。这也是导致线程间数据不可见的本质原因。因此要实现volatile变量的可见性，直接从这方面入手即可。对volatile变量的写操作与普通变量的主要区别有两点： 
+　　（1）修改volatile变量时会强制将修改后的值刷新的主内存中。 
+　　（2）修改volatile变量后会导致其他线程工作内存中对应的变量值失效。因此，再读取该变量值的时候就需要重新从读取主内存中的值。 
+```
+
+- 有序性实现
+
+>参考文档
+- https://www.cnblogs.com/william-dai/p/10895949.html
+
+## 下面的代码， str 值最终为多少？换成 Integer 值又为多少，是否会被改变？
+```
+public void test() {
+    String str = "123";
+    changeValue(str); 
+    System.out.println("str值为: " + str);  // str未被改变，str = "123"
+}
+
+public changeValue(String str) {
+    str = "abc";
+}
+```
+
+- 考点：Java 值传递 (第 2 题相同)。编写代码测试，在 changeValue() 方法中修改入参，并不会改变之前的值；
+
+- 原理 ：Java 程序设计语言总是采用按值调用，方法得到的是所有参数值的一个拷贝，即方法不能修改传递给它的任何参数变量的内容。基本类型参数传递的是参数副本，对象类型参数传递的是对象地址的副本；
+
+- 题解：在 changeValue() 中，**对于对象类型参数，直接修改的是对象地址副本的值，所以之前变量的地址并未被修改！若修改的是对象实例里面的某个值，之前变量则会被修改**
+
+
+## try...catch...finally与return
+- 场景1不走catch
+```
+ try {
+            return 1
+        } catch (E: Exception) {
+            return 2
+        } finally {
+            return 3
+        }
+
+```
+先执行try然后执行finally，最终返回3
+- 场景2走catch
+```
+        try {
+            throw RuntimeException()
+            return 1
+        } catch (E: Exception) {
+            return 2
+        } finally {
+            return 3
+        }
+```
+执行catch然后执行finally，最终返回3
+
+- 场景3有变量值更改-不走catch
+```
+//x传入2
+    fun testFinally(x: Int): Int {
+        var y = x
+        try {
+            y = y + 1
+//            throw RuntimeException()
+            return y
+        } catch (E: Exception) {
+            y = y + 2
+            return y
+        } finally {
+            y = y + 3
+            return y
+        }
+    }
+```
+先走try，y值变为3，然后执行finally，y值变为6，方法返回6
+
+- 场景4有变量值更改走catch
+```
+//x传入2
+    fun testFinally(x: Int): Int {
+        var y = x
+        try {
+            y = y + 1
+            throw RuntimeException()
+            return y
+        } catch (E: Exception) {
+            y = y + 2
+            return y
+        } finally {
+            y = y + 3
+            return y
+        }
+    }
+```
+先走try，y值变为3，然后执行catch y值变为5，最后执行finally，y值变为8，方法返回8
+
+- 场景5有变量值更改走catch，但是finally没有return
+```
+//x传入2
+    fun testFinally(x: Int): Int {
+        var y = x
+        try {
+            y = y + 1
+            throw RuntimeException()
+            return y
+        } catch (E: Exception) {
+            y = y + 2
+            return y
+        } finally {
+            y = y + 3
+
+        }
+    }
+```
+
+先走try，y值变为3，然后执行catch y值变为5，最后执行finally，y值变为8，**但是方法返回值是5**
+
+
+---
+
+>结论：finally肯定会走（除非是System.exit()），不管有没有rerun。且有变量值时会保存上一步骤的改变
+
+## static
+- static 类可以继承
+- static 方法不可以继承
+
+
+## Java方法签名
+>方法名和形参数据类型列表可以唯一的确定一个方法，与方法的返回值一点关系都没有，这是判断重载重要依据
+
+https://blog.csdn.net/qiuchengjia/article/details/52910884
+
+## == 与 equals 区别
+- ```==``` 操作比较的是两个变量的值是否相等，对于引用型变量表示的是两个变量在堆中存储的地址是否相同，即栈中的内容是否相同。
+
+- equals操作表示的两个变量是否是对同一个对象的引用，即堆中的内容是否相同。
+- ```==``` 一般用在基本数据类型中，equals()一般比较字符串是否相等
+
+## ClassLoader 的双亲委派机制
+
+```
+    类加载器的双亲委派机制的作用主要是能够保障Java平台的安全性。
+
+　　在这委托机制中，除了JVM自带的根类加载器以外，其余的加载器都有且只有一个父加载器。当Java程序请求加载器loader加载example类时，loader会首先委托父加载器去加载该类，如果父类加载器不能加载，则父类加载器再向自己的父类加载器委托，如果直到根类加载器都无法加载，则由loader自己加载。
+
+　　如果在向上委托的过程中，父加载器能加载成功，则返回example类的对应的Class对象的引用返回给loader。
+
+```
+
+## HashMap的工作原理以及代码实现，为什么要转换成红黑树？
+![](https://img2018.cnblogs.com/blog/1628624/201905/1628624-20190507151215694-307751641.png)
+- 为什么当桶中键值对数量大于8才转换成红黑树，数量小于6才转换成链表？
+```
+    HashMap在JDK1.8及以后的版本中引入了红黑树结构，若桶中链表元素个数大于等于8时，链表转换成树结构；若桶中链表元素个数小于等于6时，树结构还原成链表。因为红黑树的平均查找长度是log(n)，长度为8的时候，平均查找长度为3，如果继续使用链表，平均查找长度为8/2=4，这才有转换为树的必要。链表长度如果是小于等于6，6/2=3，虽然速度也很快的，但是转化为树结构和生成树的时间并不会太短。
+
+    还有选择6和8，中间有个差值7可以有效防止链表和树频繁转换。假设一下，如果设计成链表个数超过8则链表转换成树结构，链表个数小于8则树结构转换成链表，如果一个HashMap不停的插入、删除元素，链表个数在8左右徘徊，就会频繁的发生树转链表、链表转树，效率会很低
+```
+
+## ConcurrentHashMap
+https://blog.csdn.net/weixin_43185598/article/details/87938882
+
+### 为什么ConcurrentHashMap是线程安全的?
+```
+JDK1.7中，ConcurrentHashMap使用的锁分段技术，将数据分成一段一段的Segment存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。
+```
+
+### JDK1.7中Segment的原理
+```
+Segment，它继承了ReentrantLock，具备锁和释放锁的功能。ConcurrentHashMap只有16个Segment，并且不会扩容，最多可以支持16个线程并发写。
+```
+
+### JDK1.8的ConcurrentHashMap怎么实现线程安全的?有什么好处呢?
+```
+JDK1.8放弃了锁分段的做法，采用CAS和synchronized方式处理并发。以put操作为例，CAS方式确定key的数组下标，synchronized保证链表节点的同步效果。
+```
+好处：
+- 减少内存开销
+
+   ``` 
+   假设使用可重入锁，那么每个节点都需要继承AQS，但并不是每个节点都需要同步支持，只有链表的头节点（红黑树的根节点）需要同步，这无疑消耗巨大内存。
+   ```
+- 获得JVM的支持
+    ```
+    可重入锁毕竟是API级别的，后续的性能优化空间很小。synchronized则是JVM直接支持的，JVM能够在运行时作出相应的优化措施：锁粗化、锁消除、锁自旋等等。使得synchronized能够随着JDK版本的升级而不改动代码的前提下获得性能上的提升。
+    ```
+
+### 为什么不推荐使用HashTable呢
+    HashTable容器使用synchronized来保证线程安全，但在线程竞争激烈的情况下HashTable的效率非常低下。因为多个线程访问HashTable的同步方法时，可能会进入阻塞或轮询状态。如线程1使用put进行添加元素，线程2不但不能使用put方法添加元素，并且也不能使用get方法来获取元素，所以竞争越激烈效率越低。
+
+>[参考](https://www.cnblogs.com/xiaoyangjia/p/11598094.html)
