@@ -16,10 +16,10 @@
 
 同步屏障机制就是插入一个同步屏障信息到Looper的队列头部，当Looper调用next获取信息时候，发现队列头部是一个同步屏障信息，就会跳过所有同步消息，寻找为异步的消息执行
 
-https://www.wanandroid.com/wenda/show/8710
+[https://www.wanandroid.com/wenda/show/8710](https://www.wanandroid.com/wenda/show/8710)
 
 ## **Q：Message的缓存**
-https://www.cnblogs.com/leipDao/p/7850473.html
+[https://www.cnblogs.com/leipDao/p/7850473.html](https://www.cnblogs.com/leipDao/p/7850473.html)
 
 ## **Q: handldr实现线程通信**
 
@@ -202,7 +202,7 @@ case MeasureSpec.UNSPECIFIED:
 
 ## **Q：retrofit 源码解析**
 
-https://www.jianshu.com/p/0c055ad46b6c
+[https://www.jianshu.com/p/0c055ad46b6c](https://www.jianshu.com/p/0c055ad46b6c)
 
 ## **Q：android gc 是什么时候发生的**
 
@@ -292,7 +292,7 @@ void GC(){
 - 标注（Mark）阶段：这个过程的伪码如代码清单14 - 2所示，针对GC Roots中的每一个对象，采用递归调用的方式（第8行）处理其直接和间接引用到的所有对象：
 <center>代码清单14 - 3 标注并清理的标注阶段伪码</center>
 
-    ```
+```
     void Mark(Object* pObj) {
     if ( !pObj->IsMarked() ) {
         // 修改对象头的Marked标志
@@ -304,9 +304,9 @@ void GC(){
     }
     }
     }  
-    ```
+```
 
-    如果对象引用的层次过深，递归调用消耗完虚拟机内GC线程的栈空间，从而导致栈空间溢出（StackOverflow）异常，为了避免这种情况的发生，在具体实现时，通常是用一个叫做标注栈（Mark Stack）的数据结构来分解递归调用。一开始，标注栈（Mark Stack）的大小是固定的，但在一些极端情况下，如果标注栈的空间也不够的话，则会分配一个新的标注栈（Mark Stack），并将新老栈用链表连接起来。与引用计数法中对象的内存布局类似，对象是否被标注的标志也是保存在对象头里的，如图 14 - 2所示
+如果对象引用的层次过深，递归调用消耗完虚拟机内GC线程的栈空间，从而导致栈空间溢出（StackOverflow）异常，为了避免这种情况的发生，在具体实现时，通常是用一个叫做标注栈（Mark Stack）的数据结构来分解递归调用。一开始，标注栈（Mark Stack）的大小是固定的，但在一些极端情况下，如果标注栈的空间也不够的话，则会分配一个新的标注栈（Mark Stack），并将新老栈用链表连接起来。与引用计数法中对象的内存布局类似，对象是否被标注的标志也是保存在对象头里的，如图 14 - 2所示
 
 
 ![图 14 - 2 标注和清理算法中的对象布局](http://images.cnitblog.com/blog/49788/201306/12111950-792bcbda6b1b434395db2528f9074740.png) 
@@ -542,7 +542,7 @@ Serializable是通用的序列化机制的，将数据存储在磁盘，可以�
 
 
 ---
-https://blog.csdn.net/yulidrff/article/details/85330045
+[https://blog.csdn.net/yulidrff/article/details/85330045](https://blog.csdn.net/yulidrff/article/details/85330045)
 
 ## **Q: 算法：hash值、HashMap、最小生成树算法、KMP算法、查找算法、排序算法**
 
