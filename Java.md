@@ -257,6 +257,18 @@ https://www.cnblogs.com/toria/p/11234323.html
 
 [https://blog.csdn.net/qq360514136/article/details/88253255](https://blog.csdn.net/qq360514136/article/details/88253255)
 
+## **java 单例模式中双重检查锁定 volatile 的作用？**
+- synchronized已经保证了可见性，不需要volatile来保证。
+- volatile的作用是禁止重排序。
+    1. 申请内存空间，
+    2. 初始化默认值（区别于构造器方法的初始化），
+    3. 执行构造器方法
+    4. 连接引用和实例。
+
+    这4个步骤后两个有可能会重排序，1234 1243都有可能，造成未初始化完全的对象发布。
+    volatile可以禁止指令重排序，从而避免这个问题。
+>[https://www.zhihu.com/question/56606703](https://www.zhihu.com/question/56606703)
+
 
 ## 下面的代码， str 值最终为多少？换成 Integer 值又为多少，是否会被改变？
 ```
