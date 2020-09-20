@@ -114,3 +114,38 @@ https://blog.csdn.net/weixin_44723434/article/details/89500052
 HTTPS并非是应用层的一种新协议。只是HTTP通信接口部分用SSL 和TLS协议替代而已。通常，HTTP直接和TCP通信。当使用SSL时，则演变成先和SSL通信，再由SSL和TCP通信。
 
 [链接](https://www.jianshu.com/p/d85e2267ecb8)
+
+
+### **https握手过程**
+![](https://img-blog.csdn.net/20180425182355582?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyOTk4MTUz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+步骤 1 ： 客户端通过发送Client Hello报文开始SSL通信（这里是在TCP的三次握手已经完成的基础上进行的）。报文中包含客户端支持的SSL的指定版本、加密组件列表（所使用的加密算法及密钥长度等）。
+
+步骤 2 ： 服务器可进行SSL通信时，会以Server Hello报文作为应答。和客户端一样，在报文中包含SSL版本以及加密组件。服务器的加密组件内容是从接收到的客户端加密组件内筛选出来的。
+
+步骤 3 ： 之后服务器发送Certificate报文。报文中包含公开密钥证书。
+
+步骤 4 ： 最后服务器发送Server Hello Done 报文通知客户端，最初阶段的SSL握手协商部分结束。
+
+步骤 5 ： SSL第一次握手结束之后，客户端以Client Key Exchange报文作为回应。报文中包含通信加密中使用的一种被称为Pre-master secret的随机密码串。该报文已用步骤3中的公开密钥进行加密。
+
+步骤 6 ： 接着客户端继续发送Change Cipher Spec报文。该报文会提示服务器，在此报文之后的通信会采用Pre-master secret密钥加密。
+
+步骤 7 ： 客户端发送Finished报文。该报文包含连接至今全部报文的整体校验值。这次握手协商是否能够成功，要以服务器是否能够正确解密该报文作为判定标准。
+
+步骤 8 ： 服务器同样发送Change Cipher Spec报文。
+
+步骤 9 ： 服务器同样发送Finshed报文。
+
+步骤 10： 服务器和客户端的Finished报文交换完毕之后，SSL连接就算建立完成。当然，通信会受到SSL的保护。从此处开始进行应用层协议的通信，即发送HTTP请求。
+
+步骤 11 ： 应用层协议通信，即发送HTTP响应。
+
+步骤 12 ： 最后由客户端断开连接。断开连接时，发送close_notify报文。上图做客一些省略，这步之后再发送TCP FIN报文来关闭与TCP的通信。
+
+> [https://blog.csdn.net/qq_32998153/article/details/80022489](https://blog.csdn.net/qq_32998153/article/details/80022489)
+
+## **socket握手过程**
+- 服务器建立套接字配置
+- 服务器监听套接字
+- 客户端发送套接字

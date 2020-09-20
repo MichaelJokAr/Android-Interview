@@ -14,7 +14,7 @@
 
 ## **Q：Handler同步屏障**
 
-同步屏障机制就是插入一个同步屏障信息到Looper的队列头部，当Looper调用next获取信息时候，发现队列头部是一个同步屏障信息，就会跳过所有同步消息，寻找为异步的消息执行
+同步屏障机制就是插入一个同步屏障信息到Looper的队列头部，当Looper调用next获取信息时候，发现message的target为null时开始处理同步屏障信息，就会跳过所有同步消息，寻找为异步的消息返回给looper
 
 [https://www.wanandroid.com/wenda/show/8710](https://www.wanandroid.com/wenda/show/8710)
 
@@ -530,18 +530,21 @@ Serializable是通用的序列化机制的，将数据存储在磁盘，可以�
 
 
 ## **Q: UI绘制流程和原理**
+[https://www.cnblogs.com/joahyau/p/11294970.html](https://www.cnblogs.com/joahyau/p/11294970.html)
 
+## **onmeasure为什么会被调用两次**
+- 当```ViewRootImpl.performTraversals```方法里，第一次```perforMeasuer```测量完后子view对父view给的测量结果不满意需要扩容，则会进行第二次```perforMeasuer```方法调用进行第二次```onMeasure```
 
 ## **Q：MVVM**
 - Model：数据模型(实体类、持久化、IO)
 - View：Activity/Fragment和布局文件
 - ViewModel：业务逻辑的处理、数据的转换、连接M层和V层的桥梁
 
----
+
 与MVP基本相同，最大的不同就是model更新后不需要再通过presenter更新view，mvvm可以自动更新
 
 
----
+
 [https://blog.csdn.net/yulidrff/article/details/85330045](https://blog.csdn.net/yulidrff/article/details/85330045)
 
 ## **Q: 算法：hash值、HashMap、最小生成树算法、KMP算法、查找算法、排序算法**
@@ -687,6 +690,8 @@ IdleHandler是一个回调接口，可以通过MessageQueue的addIdleHandler添�
 
 同步屏障可以通过MessageQueue.postSyncBarrier函数来设置。该方法发送了一个没有target的Message到Queue中，在next方法中获取消息时，如果发现没有target的Message，则在一定的时间内跳过同步消息，优先执行异步消息。再换句话说，同步屏障为Handler消息机制增加了一种简单的优先级机制，异步消息的优先级要高于同步消息。在创建Handler时有一个async参数，传true表示此handler发送的时异步消息。ViewRootImpl.scheduleTraversals方法就使用了同步屏障，保证UI绘制优先执行。
 
+https://blog.csdn.net/asdgbc/article/details/79148180
+
 ### Message是什么样子的链表结构
 
 [单链表结构](https://www.jianshu.com/p/94226b3f3ffb)
@@ -700,8 +705,36 @@ IdleHandler是一个回调接口，可以通过MessageQueue的addIdleHandler添�
 https://www.cnblogs.com/billshen/p/13308650.html
 
 
+## **如何优化卡顿、view卡顿分析**
+- 检查是否是过渡绘制
+    - 减少背景，如去除和列表背景色相同的Item背景色，子view和父view相同的背景等
+        - 优化布局层级，使用merge,incloud标签，使用constantlayout替换布局等
+        - 使用viewstub延迟布局加载
+        -
+- 使用工具分析
+    - systrace 可以得到在UI绘制上是因为什么原因不符合Google制定的标准，比如measure/layout时间过长
+    - traceview 得到每个方法执行的耗时，分析优化耗时的地方
+
+## **okhttp excute 执行流程**
+
+
+## **view绘制流程源码从哪开始的**
+是从viewRootImpl.scheduleTraversals方法开始的,choreographer.post TraversalRunnable,在TraversalRunnable
+里执行performTraversals方法view绘制
+
+
+## **handler的异步消息怎么处理**
+messagequeue.next方法读取到message的traget为null时就暂停获取同步消息的message，从队列里
+获取异步消息最后返回到looper
+
+
+## **handler流程**
+handler发送message到messagequeue队列里，looper的loop方法里一直在循环的调用messagequeue的next方法获取message，
+获取到message后根据message的target的handler发送到对应的dispatchMessage,在dispatchMessage方法里判断是runable还是
+普通的message
 
 ## **出处&链接**
 
 - https://www.cnblogs.com/1157760522ch/
 - https://www.jianshu.com/p/5e5908ab3ea9
+
