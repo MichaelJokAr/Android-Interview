@@ -733,8 +733,37 @@ handler发送message到messagequeue队列里，looper的loop方法里一直在�
 获取到message后根据message的target的handler发送到对应的dispatchMessage,在dispatchMessage方法里判断是runable还是
 普通的message
 
+## **Apk的大小如何压缩 ？**
+- META-INF/：包含CERT.SF和CERT.RSA签名文件以及MANIFEST.MF 清单文件。
+
+- assets/：包含应用可以使用AssetManager对象检索的应用资源。
+
+- res/：包含未编译到的资源 resources.arsc。
+
+- lib/：包含特定于处理器软件层的编译代码。该目录包含了每种平台的子目录，像armeabi，armeabi-v7a， arm64-v8a，x86，x86_64，和mips。
+
+- resources.arsc：包含已编译的资源。该文件包含res/values/ 文件夹所有配置中的XML内容。打包工具提取此XML内容，将其编译为二进制格式，并将内容归档。此内容包括语言字符串和样式，以及直接包含在**resources.arsc*8文件中的内容路径 ，例如布局文件和图像。
+
+- classes.dex：包含以Dalvik / ART虚拟机可理解的DEX文件格式编译的类。
+
+- AndroidManifest.xml：包含核心Android清单文件。该文件列出应用程序的名称，版本，访问权限和引用的库文件。该文件使用Android的二进制XML格式。
+
+- lib、class.dex和res占用了超过90%的空间，所以这三块是优化Apk大小的重点（实际情况不唯一）
+
+
+## **app启动过程**
+> [https://blog.csdn.net/heimaer/article/details/84098739](https://blog.csdn.net/heimaer/article/details/84098739)
+- 点击桌面图标，```startActivity```
+- 进入```instrumentation```执行AMS的```startActivity```
+- AMS最终调用到```StackSupervisor```里的```startSpecificActivityLocked```来判断要启动的activity进程是否存在，不存在则调用Zygote创建进程
+-``` Zygote.main```方法里fork出进程，然后会调用```RuntimeInit.applicationInit```方法最终去执行```ActivityThread.main```方法
+- 行```ActivityThread.main```方法里主要做了创建主线程```Looper```、创建```ActivityThread```类、然后调用```ActivityThread.attach```方法
+- ```ActivityThread.attach```方法会去调用```ApplicationThread.bindApplication```创建```Application```
+- ```ApplicationThread.bindApplication```调用```Handler H ```发送```BIND_APPLICATION```,```Handler H ```去调用```ActivityThread.handleBindApplication```方法
+- ```ActivityThread.handleBindApplication```主要做了①创建```ContentImpl```②创建```Instrumentation```③创建```Application```对象④启动当前进程中的```ContentProvider```和调用其```onCreate```方法⑤调用```Application.onCreate```方法
+- 最后再通过反射机制创建目标Activity，并回调Activity.onCreate()等方法,到此App便正式启动，
 ## **出处&链接**
 
 - https://www.cnblogs.com/1157760522ch/
 - https://www.jianshu.com/p/5e5908ab3ea9
-
+- https://mp.weixin.qq.com/s/UGEEFC-OZtFqP4V7-11SIA

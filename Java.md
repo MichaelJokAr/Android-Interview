@@ -453,6 +453,7 @@ JDK1.8放弃了锁分段的做法，采用CAS和synchronized方式处理并发�
 Java 堆也是属于线程共享的内存区域，它在虚拟机启动时创建，是Java 虚拟机所管理的内存中最大的一块，储存对象实例和数组（JDK7 已把字符串常量池和类静态变量移动到 Java 堆），几乎所有的对象实例都在这里分配内存，注意Java 堆是垃圾收集器管理的主要区域，因此很多时候也被称做GC 堆，堆内存分为新生代 (Young) 和老年代 (Old) ，新生代 (Young) 又被划分为三个区域：Eden、From Survivor、To Survivor；如果在堆中没有内存完成实例分配，并且堆也无法再扩展时，将会抛出OutOfMemoryError 异常。
 
 
+
 [https://www.jianshu.com/p/702eddcac053](https://www.jianshu.com/p/702eddcac053)
 
 
