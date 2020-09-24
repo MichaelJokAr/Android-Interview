@@ -204,14 +204,7 @@ case MeasureSpec.UNSPECIFIED:
 
 [https://www.jianshu.com/p/0c055ad46b6c](https://www.jianshu.com/p/0c055ad46b6c)
 
-## **Q：android gc 是什么时候发生的**
 
-- GC_FOR_MALLOC: 表示是在堆上分配对象时内存不足触发的GC。
-- GC_CONCURRENT: 当我们应用程序的堆内存达到一定量，或者可以理解为快要满的时候，系统会自动触发GC操作来释放内存。
-- GC_EXPLICIT: 表示是应用程序调用System.gc、VMRuntime.gc接口或者收到SIGUSR1信号时触发的GC。
-- GC_BEFORE_OOM: 表示是在准备抛OOM异常之前进行的最后努力而触发的GC。
-
-[https://www.cnblogs.com/purpleraintear/p/6046441.html](https://www.cnblogs.com/purpleraintear/p/6046441.html)
 
 ## **Q：背景透明会影响过度绘制吗**
 不会影响
@@ -227,7 +220,9 @@ case MeasureSpec.UNSPECIFIED:
 
 
 ## **Q：setContentView 过程**
-
+```
+我们平时在Activity中调用的setContentView方法其实都是调用的PhoneWindow中的setContentView方法，其首先会判断mContentParent是否为null，如果为null，则执行installDecor()方法，在installDecor()方法中会对mDecor进行判断是否为null，为null则进行初始化，mDecor为DecorView类型，DecorView继承自FrameLayout。接下来继续判断mContentParent是否为null，为null则执行generateLayout方法，在generateLayout方法中最重要的逻辑就是根据我们设置的不同feature找到对应布局文件，并且inflate为View，通过addView方法加入到mDecor中，然后找到布局文件中ID为content的View作为generateLayout方法最终返回值返回。接下来回到installDecor方法将generateLayout返回值赋值给mContentParent，最后回到setContentView，将我们自己的布局文件layoutResID加载到mContentParent中。
+```
 
 [https://www.cnblogs.com/leipDao/p/7509222.html](https://www.cnblogs.com/leipDao/p/7509222.html)
 
@@ -258,11 +253,20 @@ phoneWindow (层一)
 ### action_cancel什么时候执行
     在父View中拦截ACTION_UP或ACTION_MOVE，在第一次父视图拦截消息的瞬间，父视图指定子视图不接受后续消息了，同时子视图会收到ACTION_CANCEL事件。
 
+## **Q：android gc 是什么时候发生的**
+
+- GC_FOR_MALLOC: 表示是在堆上分配对象时内存不足触发的GC。
+- GC_CONCURRENT: 当我们应用程序的堆内存达到一定量，或者可以理解为快要满的时候，系统会自动触发GC操作来释放内存。
+- GC_EXPLICIT: 表示是应用程序调用System.gc、VMRuntime.gc接口或者收到SIGUSR1信号时触发的GC。
+- GC_BEFORE_OOM: 表示是在准备抛OOM异常之前进行的最后努力而触发的GC。
+
 ## **Q: Android垃圾回收机制**
 
 [出处](https://blog.csdn.net/u012505618/article/details/78415275)
 
 常见的垃圾回收算法有引用计数法（Reference Counting）、标注并清理（Mark and Sweep GC）、拷贝（Copying GC）和逐代回收（Generational GC）等算法，其**中Android系统采用的是标注并删除和拷贝GC**，并不是大多数JVM实现里采用的逐代回收算法
+
+[https://www.cnblogs.com/purpleraintear/p/6046441.html](https://www.cnblogs.com/purpleraintear/p/6046441.html)
 
 ### 标注并清理回收法（Mark and Sweep GC）
 
@@ -708,9 +712,8 @@ https://www.cnblogs.com/billshen/p/13308650.html
 ## **如何优化卡顿、view卡顿分析**
 - 检查是否是过渡绘制
     - 减少背景，如去除和列表背景色相同的Item背景色，子view和父view相同的背景等
-        - 优化布局层级，使用merge,incloud标签，使用constantlayout替换布局等
-        - 使用viewstub延迟布局加载
-        -
+    - 优化布局层级，使用merge,incloud标签，使用constantlayout替换布局等
+    - 使用viewstub延迟布局加载
 - 使用工具分析
     - systrace 可以得到在UI绘制上是因为什么原因不符合Google制定的标准，比如measure/layout时间过长
     - traceview 得到每个方法执行的耗时，分析优化耗时的地方
@@ -761,7 +764,7 @@ handler发送message到messagequeue队列里，looper的loop方法里一直在�
 - ```ActivityThread.attach```方法会去调用```ApplicationThread.bindApplication```创建```Application```
 - ```ApplicationThread.bindApplication```调用```Handler H ```发送```BIND_APPLICATION```,```Handler H ```去调用```ActivityThread.handleBindApplication```方法
 - ```ActivityThread.handleBindApplication```主要做了①创建```ContentImpl```②创建```Instrumentation```③创建```Application```对象④启动当前进程中的```ContentProvider```和调用其```onCreate```方法⑤调用```Application.onCreate```方法
-- 最后再通过反射机制创建目标Activity，并回调Activity.onCreate()等方法,到此App便正式启动，
+- 最后再创建目标Activity，并回调Activity.onCreate()等方法,到此App便正式启动，
 ## **出处&链接**
 
 - https://www.cnblogs.com/1157760522ch/

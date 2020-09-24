@@ -364,11 +364,7 @@ Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     * [Android 图片加载框架Glide4.0源码完全解析 一](http://www.cnblogs.com/guanmanman/p/7008259.html)
     * [Android 图片加载框架Glide4.0源码完全解析 二](http://www.cnblogs.com/guanmanman/p/7040942.html)
 
-### **otto源码解析**
 
-
-* [otto](https://github.com/square/otto) 这个开源项目是一个event bus模式的消息框架，用于程序各个模块之间的通信，此消息框架可以使得各个
-模块之间减少耦合性。
 
 * **链接**
     * [otto源码分析](http://blog.csdn.net/com360/article/details/38640771)
